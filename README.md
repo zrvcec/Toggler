@@ -1,2 +1,2 @@
 # Toggler
-# Toggle  A lightweight, reusable Luau module for managing boolean
+A lightweight, reusable Luau module for managing states intended for scaling purposes
