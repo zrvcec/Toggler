@@ -4,7 +4,7 @@
 local Toggle = {}
 Toggle.__index = Toggle
 
--- Toggles between true and false states. Can be used to handle toggling events, such as opening and closing a menu.
+-- Toggles between dynamic number states. Can be used to handle toggling events, such as opening and closing a menu.
 -- @param ShouldDebounce: If true, the toggler will not allow the same state to be set twice in a row. Default is false.
 function Toggle.new(ShouldDebounce:boolean?)
 	local self = setmetatable({}, Toggle)
@@ -36,7 +36,7 @@ function Toggle:SetTogglerHandler(fn :(Toggled:number, ...any)->())
 end
 
 -- Sets the state of the toggler to the specified value.
--- @param setNewStateTo: The new state to set the toggler to.
+-- @param setNewStateTo: The new state to set the toggler to. a number value representing the new state.
 function Toggle:SetState(setNewStateTo:number, ...:any)
 	local self = self :: Toggler
 	local handle = self.ToggleHandler
