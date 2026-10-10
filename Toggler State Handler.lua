@@ -79,6 +79,16 @@ function Toggle:Reload()
 	return self:SetState(setNewStateTo, table.unpack(self.LastTuple, 1, self.LastTuple.n))
 end
 
+function Toggle:SetStateTrue(...:any)
+	local self = self :: Toggler
+	return self:SetState(true, ...)
+end
+
+function Toggle:SetStateFalse(...:any)
+	local self = self :: Toggler
+	return self:SetState(false, ...)
+end
+
 -- Returns the current state of the toggler. If no state has been set, it will return nil.
 function Toggle:GetCurrentState()
 	local self = self :: Toggler
