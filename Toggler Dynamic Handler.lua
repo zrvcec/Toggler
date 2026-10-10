@@ -9,21 +9,20 @@ Toggle.__index = Toggle
 function Toggle.new(ShouldDebounce:boolean?)
 	local self = setmetatable({}, Toggle)
 	
-	self.Toggled = nil :: boolean?
-	self.ToggleHandler = nil :: ((Toggled:boolean) -> ())?
+	self.Toggled = nil :: number?
+	self.ToggleHandler = nil :: ((Toggled:number, ...any) -> ())?
 	self.ShouldDebounce = ShouldDebounce or false
 	self.LastTuple = table.pack()
+	self.TMode = "DYNAMIC"
 
 	return self
 end
 
-
 export type Toggler = typeof(Toggle.new())
-
 
 -- Sets the handler function for the toggler.
 -- @param fn: The function to be called when the toggler state changes.
-function Toggle:SetTogglerHandler(fn :(Toggled:boolean, ...any)->())
+function Toggle:SetTogglerHandler(fn :(Toggled:number, ...any)->())
 	local self = self :: Toggler
 	
 	if typeof(fn) ~= "function" then
@@ -36,10 +35,9 @@ function Toggle:SetTogglerHandler(fn :(Toggled:boolean, ...any)->())
 	return true
 end
 
-
 -- Sets the state of the toggler to the specified value.
--- @param setNewStateTo: The new state to set the toggler to. True for toggled on, false for toggled off.
-function Toggle:SetState(setNewStateTo:boolean, ...:any)
+-- @param setNewStateTo: The new state to set the toggler to.
+function Toggle:SetState(setNewStateTo:number, ...:any)
 	local self = self :: Toggler
 	local handle = self.ToggleHandler
     
@@ -69,7 +67,7 @@ function Toggle:Reload()
 	local self = self :: Toggler
 	local CurrentState = self.Toggled
 	local setNewStateTo = CurrentState
-	
+
 	if setNewStateTo == nil then
 		warn("Reloading failed. No previous state has been set.")
 		return false

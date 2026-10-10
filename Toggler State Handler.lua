@@ -10,9 +10,10 @@ function Toggle.new(ShouldDebounce:boolean?)
 	local self = setmetatable({}, Toggle)
 	
 	self.Toggled = nil :: boolean?
-	self.ToggleHandler = nil :: ((Toggled:boolean) -> ())?
+	self.ToggleHandler = nil :: ((Toggled:boolean, ...any) -> ())?
 	self.ShouldDebounce = ShouldDebounce or false
 	self.LastTuple = table.pack()
+	self.TMode = "STATE"
 
 	return self
 end
