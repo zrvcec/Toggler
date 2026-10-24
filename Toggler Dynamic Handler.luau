@@ -4,6 +4,9 @@
 local Toggle = {}
 Toggle.__index = Toggle
 
+local Signal = require("./Signal/Signal")
+
+
 -- Toggles between dynamic number states. Can be used to handle toggling events, such as opening and closing a menu.
 -- @param ShouldDebounce: If true, the toggler will not allow the same state to be set twice in a row. Default is false.
 function Toggle.new(ShouldDebounce:boolean?)
@@ -14,6 +17,7 @@ function Toggle.new(ShouldDebounce:boolean?)
 	self.ShouldDebounce = ShouldDebounce or false
 	self.LastTuple = table.pack()
 	self.TMode = "DYNAMIC"
+	self.Toggled = Signal.new()
 
 	return self
 end
