@@ -16,7 +16,7 @@ function Toggle.new(ShouldDebounce:boolean?)
 	self.ShouldDebounce = ShouldDebounce or false
 	self.LastTuple = table.pack()
 	self.TMode = "STATE"
-	self.Toggled = Signal.new()
+	self.Signal = Signal.new()
 	return self
 end
 
@@ -63,6 +63,7 @@ function Toggle:SetState(setNewStateTo:boolean, ...:any)
 
 	self.LastTuple = table.pack(...)
 	self.Toggled = setNewStateTo
+	self.Signal:Fire(self.Toggled)
 	return true
 end
 
